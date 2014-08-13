@@ -3,9 +3,8 @@
 angular.module('uiApp', ['ngResource']);
 angular.element(document).ready(function () {
     'use strict';
-    angular.bootstrap(document, ['uiAapp']);
+    angular.bootstrap(document, ['uiApp']);
 });
-
 
 angular.module('uiApp', ['ngResource'])
   .config(function ($routeProvider, $locationProvider) {
