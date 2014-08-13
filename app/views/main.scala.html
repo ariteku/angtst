@@ -20,8 +20,10 @@
           <script src="@routes.Assets.at("javascripts/ie-shim.min.js")"></script>
         <![endif]-->
 
-        <div style="background-color:#eee; border: 1px solid #ddd;margin:0px; padding: 10px;">
-        <h1>Header Space</h1>
+        <div style="background-color:#eee; border: 1px solid #ddd;margin:0px; padding: 15px;">
+          <h1 style="margin:0">Header Space</h1>
+          <a ng-href="/">top</a> |
+          <a ng-href="/users">users</a>
         </div>
 
         <div class="container" ng-view></div>
@@ -32,10 +34,10 @@
         <script src="@routes.Assets.at("javascripts/main.min.js")"></script>
         *@
         <script src="@routes.Assets.at("app.js")"></script>
-        <script src="@routes.Assets.at("main.js")"></script>
-        <script src="@routes.Assets.at("index.js")"></script>
-        <script src="@routes.Assets.at("edit.js")"></script>
-        <script src="@routes.Assets.at("user.js")"></script>
+        <script src="@routes.Assets.at("controllers/main.js")"></script>
+        <script src="@routes.Assets.at("controllers/users/index.js")"></script>
+        <script src="@routes.Assets.at("controllers/users/edit.js")"></script>
+        <script src="@routes.Assets.at("resources/user.js")"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
