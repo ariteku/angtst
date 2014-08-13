@@ -13,7 +13,11 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.11.1"
 
+unmanagedResourceDirectories in Assets <+= baseDirectory( _ / "ui" / "app" / "bower_components" )
+
 unmanagedResourceDirectories in Assets <+= baseDirectory( _ / "ui" / "app" / "views" )
+
+unmanagedResourceDirectories in Assets <+= baseDirectory( _ / "ui" / "app" / "scripts")
 
 libraryDependencies ++= Seq(
   jdbc,

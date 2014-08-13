@@ -2,6 +2,8 @@
 
 GET      /public/*file                                                controllers.Assets.at(path = "/public", file)
 GET      /views/*file                                                 controllers.Assets.at(path = "/public", file )
+GET      /bower_components/*file                                      controllers.Assets.at(path = "/public", file )
+GET      /scripts/*file                                               controllers.Assets.at(path = "/public", file )
 
 ->       /api                                                         api.Routes
 
