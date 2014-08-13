@@ -1,5 +1,6 @@
 <h2>Users</h2>
+<button class="pull-right btn btn-danger" ng-click="add()">Add</button>
 
 <ul>
-    <li ng-repeat="u in users"><a ng-href="/user/{{u.id}}">{{u.email}} - {{u.firstName}}</a></li>
+    <li ng-repeat="u in users">{{u.id}}: <a ng-href="/user/{{u.id}}"> {{u.email}} - {{u.firstName}}</a></li>
 </ul>
