@@ -11,7 +11,8 @@ angular.module('uiApp').controller('UserEditCtrl', ['$scope', '$routeParams', '$
 
   $scope.remove = function (user) {
     user.$remove({userId: user.id}, function () {
-      $location.path = '/users';
+      console.log('remove', user);
+      $location.path('/users');
     });
   };
 
