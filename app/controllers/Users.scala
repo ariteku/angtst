@@ -7,7 +7,7 @@ import collection.mutable.MutableList
 
 object Users extends Controller {
 
-  val users = MutableList(
+  var users = MutableList(
     User(Some(1), "user1@doe.com", "user1", "Doe1"),
     User(Some(2), "user2@doe.com", "user2", "Doe2"),
     User(Some(3), "user3@doe.com", "user3", "Doe3"),
@@ -49,7 +49,18 @@ object Users extends Controller {
     )
   }
 
+  def add() = Action { implicit request =>
+    val lastId = users.maxBy(_.id).id.getOrElse(1L)
+    users += User(Some(lastId + 1),"none@none.com","none","none")
+    Ok("")
+  }
+
   def remove(id: Long) = Action { implicit request =>
+    println(s"request: remove id=$id")
+    users = users filter {
+      case User(Some(x),_,_,_) if x != id => true
+      case _ => false
+    }
     Ok("")
   }
 
