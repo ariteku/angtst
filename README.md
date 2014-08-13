@@ -6,8 +6,8 @@ http://floating-wildwood-8506.herokuapp.com/
 
 method| uri
 ------|----------
-GET   | /user
-GET   | /user/add
-GET   | /user/:id
-POST  | /user/:id
-DELETE| /user/:id
+GET   | /api/user
+GET   | /api/user/add
+GET   | /api/user/:id
+POST  | /api/user/:id
+DELETE| /api/user/:id
