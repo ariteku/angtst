@@ -2,9 +2,11 @@ angular.module('uiApp').controller('UserEditCtrl', ['$scope', '$routeParams', '$
   'use strict';
 
   $scope.user = User.get({userId: $routeParams.userId});
+  $scope.msg = ""
 
   $scope.save = function (user) {
     user.$save({userId: user.id}, function (user) {
+      $scope.msg = "save complite."
       console.log('save', user);
     });
   };
