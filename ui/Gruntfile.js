@@ -15,8 +15,18 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  // configurable paths
+  var appConfig = {
+    components: 'app/bower_components',
+    dist: {
+      javascripts: '../public/javascripts'
+    }
+  };
+
   // Define the configuration for all the tasks
   grunt.initConfig({
+
+    conf: appConfig,
 
     // Project settings
     yeoman: {
@@ -32,8 +42,8 @@ module.exports = function (grunt) {
         tasks: ['bowerInstall']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
+        files: ['<%= yeoman.app %>/scripts/{,*/,*/*/}*.js'],
+        tasks: ['newer:jshint:all', 'uglify'],
         options: {
           livereload: true
         }
@@ -294,33 +304,48 @@ module.exports = function (grunt) {
     },
 
     // Copies remaining files to places other tasks can use
+//    copy: {
+//      dist: {
+//        files: [{
+//          expand: true,
+//          dot: true,
+//          cwd: '<%= yeoman.app %>',
+//          dest: '<%= yeoman.dist %>',
+//          src: [
+//            '*.{ico,png,txt}',
+//            '.htaccess',
+//            '*.html',
+//            'views/{,*/}*.html',
+//            'images/{,*/}*.{webp}',
+//            'fonts/*'
+//          ]
+//        }, {
+//          expand: true,
+//          cwd: '.tmp/images',
+//          dest: '<%= yeoman.dist %>/images',
+//          src: ['generated/*']
+//        }]
+//      },
+//      styles: {
+//        expand: true,
+//        cwd: '<%= yeoman.app %>/styles',
+//        dest: '.tmp/styles/',
+//        src: '{,*/}*.css'
+//      }
+//    },
+
     copy: {
       dist: {
         files: [{
           expand: true,
+          flatten: true,
           dot: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>',
+          cwd: '<%= conf.components %>',
+          dest: '<%= conf.dist.javascripts %>',
           src: [
-            '*.{ico,png,txt}',
-            '.htaccess',
-            '*.html',
-            'views/{,*/}*.html',
-            'images/{,*/}*.{webp}',
-            'fonts/*'
+            'jquery/dist/jquery.min.js'
           ]
-        }, {
-          expand: true,
-          cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/images',
-          src: ['generated/*']
         }]
-      },
-      styles: {
-        expand: true,
-        cwd: '<%= yeoman.app %>/styles',
-        dest: '.tmp/styles/',
-        src: '{,*/}*.css'
       }
     },
 
@@ -361,9 +386,34 @@ module.exports = function (grunt) {
     //     }
     //   }
     // },
+    uglify: {
+      dist: {
+        files: {
+          //'<%= yeoman.dist %>/scripts/main.min.js': [
+          '<%= conf.dist.javascripts %>/main.min.js': [
+            '<%= yeoman.app %>/scripts/{,*/,*/*/}*.js'
+          ]
+        }
+      }
+    },
     // concat: {
     //   dist: {}
     // },
+    concat: {
+      dist: {
+        files: {
+          '<%= conf.dist.javascripts %>/angular.min.js': [
+            '<%= conf.components %>/angular/angular.min.js',
+            '<%= conf.components %>/angular-resource/angular-resource.min.js'/*,
+            '<%= conf.components %>/angular-bootstrap/dist/ui-bootstrap-tpls-0.1.0.min.js'*/
+          ],
+          '<%= conf.dist.javascripts %>/ie-shim.min.js': [
+            '<%= conf.components %>/es5-shim/es5-shim.min.js',
+            '<%= conf.components %>/json3/lib/json3.min.js'
+          ]
+        }
+      }
+    },
 
     // Test settings
     karma: {
@@ -412,6 +462,7 @@ module.exports = function (grunt) {
     'concat',
     'ngmin',
     'copy:dist',
+    'copy',
     'cdnify',
     'cssmin',
     'uglify',
