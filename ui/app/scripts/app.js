@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('uiApp', ['ngResource']);
+angular.module('uiApp', ['ngRoute', 'ngResource']);
 angular.element(document).ready(function () {
     'use strict';
     angular.bootstrap(document, ['uiApp']);
 });
 
-angular.module('uiApp', ['ngResource'])
+angular.module('uiApp', ['ngRoute', 'ngResource'])
   .config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     console.log("hoge");
